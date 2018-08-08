@@ -3,52 +3,27 @@ package temp;
 import java.io.File;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-public class Temp {
+public class Temp extends Application{
     
-    private static Scanner x;
-    public static void main(String[] args) {
-        String filePath = "data.txt";
-        String searchTerm = "1234";
+    @Override
+    public void start(Stage stage) throws Exception
+    {
+        Parent root = FXMLLoader.load(getClass().getResource("FXMLTemp.fxml"));
         
-        readRecord(filePath, searchTerm);
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("file:./src/temp/TempTheme.css");
+        stage.setScene(scene);
+        stage.show();
     }
     
-    public static void readRecord(String searchTerm, String filePath)
-    {
-        boolean found = false;
-        String id = "", name = "", age = "";
-        
-        try
-        {
-            x = new Scanner(new File("data.txt"));
-            x.useDelimiter("[,\n]");
-            
-            while(x.hasNext() && !found)
-            {
-                id = x.next();
-                name = x.next();
-                age = x.next();
-                
-                if(id.equals(searchTerm))
-                {
-                    found = true;
-                }
-            }
-            
-            if(found)
-            {
-                JOptionPane.showMessageDialog(null, "ID: " + id + " Name: " + name + " Age: " + age);
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(null, "Not found!");
-            }
-        }
-        catch(Exception e)
-        {
-            System.out.println("File not found!");
-        }
+    public static void main(String[] args) {
+        launch(args);
     }
     
 }
