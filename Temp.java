@@ -1,12 +1,10 @@
 package temp;
 
-import java.io.File;
-import java.util.Scanner;
-import javax.swing.JOptionPane;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Temp extends Application{
@@ -15,6 +13,18 @@ public class Temp extends Application{
     public void start(Stage stage) throws Exception
     {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLTemp.fxml"));
+        
+        try
+        {   
+            Image icon = new Image("file:./res/today.png");
+            stage.getIcons().add(icon);
+        }
+        catch(Exception e)
+        {
+            System.out.println("Image failed to load!");
+        }
+        
+        stage.setTitle("Job Centre - Universal Credit");
         
         Scene scene = new Scene(root);
         scene.getStylesheets().add("file:./src/temp/TempTheme.css");
